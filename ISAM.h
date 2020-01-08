@@ -58,6 +58,8 @@ void create_database_files(ISAM DB);
 int create_index(ISAM DB);
 //Creates the record file and sets all records to available
 int create_record_file(ISAM DB);
+//Initilaizes all records in the record file
+int init_record_file(ISAM DB, FILE* fileptr);
 //Creates the overflow file and sets all records to available
 int create_overflow_file(ISAM DB);
 //Opens the specified file in the specified mode

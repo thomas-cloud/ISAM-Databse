@@ -100,7 +100,8 @@ int create_index(ISAM DB)
 
         for(i = 0; i < 100; i++)
         {
-            offset = (sizeof(int) * 2) + (i * INDEX_STRUCT);
+            //TODO: seek the size of the index struct plus the offset of the counts
+            //offset = (sizeof(int) * 2) + (i * INDEX_STRUCT);
             //Write all index entries to the file
             //Seek to all record entries
             
@@ -151,6 +152,25 @@ int create_overflow_file(ISAM DB)
     //Return success 
     return 0;
 }
+
+/*
+    Once the random access file is created the 
+*/
+int init_record_file(ISAM DB, FILE* fileptr)
+{
+    //Loop through 0 to DB->max_record_count
+    //Set each record as available
+    int i;
+    for(i = 0; i < DB->max_records; i++)
+    {
+        fseek(fileptr, i*sizeof(RECORD_STRUCT), SEEK_SET);
+        //Set the record to available
+    }
+    //return success
+    return 0;
+}
+
+
 /*
     Opens the specified file in the specified mode and returns a pointer
     Utilizes the files enum to determine the selected file
